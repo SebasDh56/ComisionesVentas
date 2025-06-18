@@ -1,0 +1,22 @@
+﻿databases:
+  - name: comisionesventasdb
+    databaseName: comisionesventasdb
+    plan: free
+    sqlite3: true
+
+services:
+  - type: web
+    name: comisionesventas
+    env: dotnet
+    buildCommand: dotnet publish -c Release
+    startCommand: dotnet ComisionesVentas.dll
+    envVars:
+      - key: ASPNETCORE_URLS
+        value: http://0.0.0.0:5000
+      - key: DOTNET_VERSION
+        value: 8.0
+    autoDeploy: true
+    plan: free
+    buildFilter:
+      paths:
+        - ComisionesVentas.csproj

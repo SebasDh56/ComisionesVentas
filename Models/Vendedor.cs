@@ -1,5 +1,4 @@
-﻿using ComisionesVentas.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ComisionesVentas.Models
@@ -9,8 +8,8 @@ namespace ComisionesVentas.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public string Nombre { get; set; }
-        public string Email { get; set; }
-        public virtual ICollection<Venta> Ventas { get; set; }
+        public required string Nombre { get; set; } // Usar required
+        public string? Email { get; set; } // Permitir nulo con ?
+        public virtual required ICollection<Venta> Ventas { get; set; } // Usar required para navegación
     }
 }

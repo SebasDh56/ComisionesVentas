@@ -1,5 +1,4 @@
-﻿using ComisionesVentas.Models;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ComisionesVentas.Models
@@ -9,14 +8,14 @@ namespace ComisionesVentas.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public int VendedorId { get; set; }
-        public virtual Vendedor Vendedor { get; set; }
+        public required int VendedorId { get; set; }
+        public virtual required Vendedor Vendedor { get; set; } // Usar required para navegación
         [Required]
-        public DateTime Fecha { get; set; }
+        public required DateTime Fecha { get; set; }
         [Required]
-        public decimal Monto { get; set; }
+        public required decimal Monto { get; set; }
         [Required]
-        public int ReglaId { get; set; }
-        public virtual Regla Regla { get; set; }
+        public required int ReglaId { get; set; }
+        public virtual required Regla Regla { get; set; } // Usar required para navegación
     }
 }
