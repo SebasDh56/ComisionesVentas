@@ -26,6 +26,23 @@ namespace ComisionesVentas.Data
                 .WithOne(v => v.Regla)
                 .HasForeignKey(v => v.ReglaId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Configurar precisión y escala para propiedades decimales
+            modelBuilder.Entity<Regla>()
+                .Property(r => r.MontoMinimo)
+                .HasColumnType("decimal(10,2)");
+
+            modelBuilder.Entity<Regla>()
+                .Property(r => r.MontoMaximo)
+                .HasColumnType("decimal(10,2)");
+
+            modelBuilder.Entity<Regla>()
+                .Property(r => r.PorcentajeComision)
+                .HasColumnType("decimal(5,2)");
+
+            modelBuilder.Entity<Venta>()
+                .Property(v => v.Monto)
+                .HasColumnType("decimal(10,2)");
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using SalesCommissionApp.Models;
+﻿using ComisionesVentas.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
