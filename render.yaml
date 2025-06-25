@@ -3,6 +3,7 @@ services:
   - type: web
     name: comisiones-ventas
     env: dotnet
+    dotnetVersion: "8.0"  # Especifica la versión de .NET (ajústala según tu proyecto, por ejemplo, 6.0, 7.0, o 8.0)
     buildCommand: dotnet publish -c Release -o ./publish
     startCommand: dotnet ./publish/ComisionesVentas.dll
     envVars:
