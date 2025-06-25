@@ -18,7 +18,7 @@ namespace ComisionesVentas.Controllers
         public IActionResult Index()
         {
             ViewBag.Vendedores = _context.Vendedores.ToList();
-            return View(new CommissionViewModel());
+            return View(new CommissionViewModel { Ventas = new List<VentaCommission>() }); // Inicialización explícita
         }
 
         [HttpPost]
