@@ -10,39 +10,26 @@ namespace ComisionesVentas.Data
         }
 
         public DbSet<Vendedor> Vendedores { get; set; }
-        public DbSet<Venta> Ventas { get; set; }
         public DbSet<Regla> Reglas { get; set; }
+        public DbSet<Venta> Ventas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Vendedor>()
-                .HasMany(v => v.Ventas)
-                .WithOne(v => v.Vendedor)
-                .HasForeignKey(v => v.VendedorId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Regla>()
-                .HasMany(r => r.Ventas)
-                .WithOne(v => v.Regla)
-                .HasForeignKey(v => v.ReglaId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            // Configurar precisión y escala para propiedades decimales
-            modelBuilder.Entity<Regla>()
-                .Property(r => r.MontoMinimo)
-                .HasColumnType("decimal(10,2)");
-
-            modelBuilder.Entity<Regla>()
-                .Property(r => r.MontoMaximo)
-                .HasColumnType("decimal(10,2)");
-
-            modelBuilder.Entity<Regla>()
-                .Property(r => r.PorcentajeComision)
-                .HasColumnType("decimal(5,2)");
+            // Configurar relaciones y claves primarias/foráneas
+            modelBuilder.Entity<Venta>()
+                .HasOne(v => v.Vendedor)
+                .WithMany()
+                .HasForeignKey(v => v.VendedorId);
 
             modelBuilder.Entity<Venta>()
-                .Property(v => v.Monto)
-                .HasColumnType("decimal(10,2)");
+                .HasOne(v => v.Regla)
+                .WithMany()
+                .HasForeignKey(v => v.ReglaId);
+
+            // Opcional: Asegurar que las claves primarias sean auto-incrementales (si no están configuradas en los modelos)
+            modelBuilder.Entity<Vendedor>().Property(v => v.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Regla>().Property(r => r.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Venta>().Property(v => v.Id).ValueGeneratedOnAdd();
         }
     }
 }
