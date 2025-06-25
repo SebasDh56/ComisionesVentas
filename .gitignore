@@ -361,3 +361,10 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# .gitignore
+bin/
+obj/
+*.db
+!.gitignore
+!ComisionesVentasDB.db
