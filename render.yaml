@@ -1,22 +1,13 @@
-﻿databases:
-  - name: comisionesventasdb
-    databaseName: comisionesventasdb
-    plan: free
-    sqlite3: true
-
+﻿# render.yaml
 services:
   - type: web
-    name: comisionesventas
+    name: comisiones-ventas
     env: dotnet
-    buildCommand: dotnet publish -c Release
-    startCommand: dotnet ComisionesVentas.dll
+    buildCommand: dotnet publish -c Release -o ./publish
+    startCommand: dotnet ./publish/ComisionesVentas.dll
     envVars:
-      - key: ASPNETCORE_URLS
-        value: http://0.0.0.0:5000
-      - key: DOTNET_VERSION
-        value: 8.0
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: DOTNET_CLI_TELEMETRY_OPTOUT
+        value: 1
     autoDeploy: true
-    plan: free
-    buildFilter:
-      paths:
-        - ComisionesVentas.csproj
